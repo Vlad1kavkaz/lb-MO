@@ -1,6 +1,7 @@
 package org.lb.lb3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +16,10 @@ public class ChangeMethod {
                                       String[] alternative) {
 
         double[] normalWeigth = normalizeWeigth(weigth);
+        System.out.println("Нормализованный вектор весов: "+Arrays.toString(normalWeigth));
         int columns = A[0].length;
 
+        //Поиск индекса главного критерия
         int index = -1;
         for (int i = 0; i < minimalValue.length; i++) {
             if (minimalValue[i] == 1) {
@@ -25,7 +28,7 @@ public class ChangeMethod {
             }
         }
 
-
+        //Поиск максимума и минимума столбцов
         double[] maxFound = new double[A.length];
         for (int j = 0; j < columns; j++) {
             maxFound[j] = foundMax(A, j);
@@ -35,16 +38,29 @@ public class ChangeMethod {
             minFound[j] = foundMin(A, j);
         }
 
+        System.out.println("Максимальные и минимальные элементы столбцов:\n" +
+                "Максимумы: " +
+                Arrays.toString(maxFound) +
+                "\nМинимумы: " +
+                Arrays.toString(minFound));
 
+        //Нормировка матрицы
+        System.out.println("Нормированная матрица А:");
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < columns; j++) {
                 if (j != index) {
-                    A[i][j] = (A[i][j] - minFound[j])/(maxFound[j] - minFound[j]);
+                    A[i][j] = (A[i][j] - minFound[j]) / (maxFound[j] - minFound[j]);
                 }
+
             }
         }
 
+        for (double[] doubles : A) {
+            System.out.println(Arrays.toString(doubles));
+        }
 
+        //Повторно ищем максимумы и минимумы столбцов чтоб затем провести проверку
+        //на удовлетворение условий минимальности
         for (int j = 0; j < columns; j++) {
             maxFound[j] = foundMax(A, j);
         }
@@ -62,7 +78,6 @@ public class ChangeMethod {
                 }
             }
         }
-
         //теперь в indexes есть интексы строк, которые удоавлетворяют минимальным критериям
         //дальше надо посчитать значение на нормализованный вес и отдать максимум
 
@@ -84,6 +99,7 @@ public class ChangeMethod {
                 value.put(i, val); // Добавляем в карту только если нет нулевых элементов
             }
         }
+
 
         // Найти максимальное значение и соответствующий индекс
         double maxVal = Double.NEGATIVE_INFINITY;
@@ -120,6 +136,7 @@ public class ChangeMethod {
     }
 
 
+    //Функция нормализации вектора весов
     public static double[] normalizeWeigth (int[] weigth) {
         double sum = 0.0;
         for (double num : weigth) {
@@ -135,5 +152,26 @@ public class ChangeMethod {
         }
 
         return normalizedWeights;
+    }
+    public static void main(String[] args) {
+        //Матрица оценок для альтернатив
+        double[][] A = {
+                {7, 2, 2, 5},
+                {1, 6, 1, 3},
+                {3, 1, 5, 3},
+                {5, 5, 6, 1},
+        };
+        //Вектор весов
+        int[] w = {6, 8, 4, 2};
+        //Допустимые уровни для критериев, 1 потому что первый критерий главный
+        double[] a = {1.0, 0.2, 0.5, 0.1};
+        //Альтернативы санаториев
+        String[] alternative = {"Липецк", "Сосновый бор", "Лесная жемчужина", "Сосны"};
+        String result = runChengeMethod(A, w, a, alternative);
+        String GREEN = "\u001B[32m";
+        String RESET = "\u001B[0m";
+
+        System.out.println(GREEN + "Результат работы программы." + RESET);
+        System.out.println("Лучший выбор: "+result);
     }
 }

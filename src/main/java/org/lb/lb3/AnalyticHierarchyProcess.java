@@ -16,19 +16,54 @@ public class AnalyticHierarchyProcess {
         ArrayList<ArrayList<Double>> Dpoln = getPoln(D);
         ArrayList<ArrayList<Double>> critPoln = getPoln(critery);
 
-        ArrayList<ArrayList<Double>> matrix = getMatrix(Apoln, Bpoln, Cpoln, Dpoln);
+        System.out.println("Дополненная матрица А:");
+        for (ArrayList<Double> item : Apoln) {
+            System.out.println(item);
+        }
 
+        System.out.println("Дополненная матрица B:");
+        for (ArrayList<Double> value : Bpoln) {
+            System.out.println(value);
+        }
+
+        System.out.println("Дополненная матрица C:");
+        for (ArrayList<Double> list : Cpoln) {
+            System.out.println(list);
+        }
+
+        System.out.println("Дополненная матрица D:");
+        for (ArrayList<Double> arrayList : Dpoln) {
+            System.out.println(arrayList);
+        }
+
+        System.out.println("Дополненная матрица критериев:");
+        for (ArrayList<Double> doubleArrayList : critPoln) {
+            System.out.println(doubleArrayList);
+        }
+
+        //Получаем новую матрицу из столбцов нормализованных сумм
+        System.out.println("Матрица из столбцов нормализованных сумм: ");
+        ArrayList<ArrayList<Double>> matrix = getMatrix(Apoln, Bpoln, Cpoln, Dpoln);
+        for (ArrayList<Double> arrayList : matrix) {
+            System.out.println(arrayList);
+        }
+
+        //Получаем еще одну новую матрицу из нормализованной суммы критериев
+        System.out.println("Матрица нормализованных сумм критериев: ");
         ArrayList<Double> critMatrix = new ArrayList<>();
 
         for (ArrayList<Double> doubles : critPoln) {
             critMatrix.add(doubles.get(doubles.size() - 1));
         }
+        System.out.println(critMatrix);
 
+
+        //Перемножаем две новые матрицы
         ArrayList<Double> resultVector = multiplyMatrixAndVector(matrix, critMatrix);
+        System.out.println("Результат перемножения матриц: ");
+        System.out.println(resultVector);
 
-
-
-
+        //Возвращаем строку с индексом максимума из результата перемножения
         return alternative[findMaxIndex(resultVector)];
     }
 
@@ -116,5 +151,57 @@ public class AnalyticHierarchyProcess {
             sum += row.get(columnIndex);
         }
         return sum;
+    }
+
+    public static void main(String [] args) {
+
+        //Сравнение альтернатив для качетсва лечения
+        double[][] A = {
+                {1, 3, 5, 7},
+                {0.33333, 1, 0.33333, 0.2},
+                {0.2, 3, 1, 0.33333},
+                {0.14268, 5, 3, 1}
+        };
+
+        //Сравнение альтернатив для уровня сервиса
+        double[][] B = {
+                {1, 7, 1, 0.5},
+                {0.14268, 1, 0.33333, 0.14268},
+                {1, 3, 1, 0.2},
+                {5, 7, 5, 1}
+        };
+
+        //Сравнение альтернатив для качетсва питания
+        double[][] C = {
+                {1, 1, 0.2, 0.14268},
+                {1, 1, 0.2, 0.2},
+                {5, 5, 1, 0.33333},
+                {7, 7, 3, 1}
+        };
+
+        //Сравнение альтернатив для удаленности от Москвы
+        double[][] D = {
+                {1, 3, 3, 5},
+                {0.33333, 1, 1, 3},
+                {0.33333, 1, 1, 3},
+                {0.2, 0.33333, 0.33333, 1}
+        };
+
+        //Оценка приоритетов критериев
+        double[][] critery = {
+                {1, 3, 5, 7},
+                {0.33333, 1, 3, 5},
+                {0.2, 0.33333, 1, 3},
+                {0.14286, 0.2, 0.33333, 1}
+        };
+        String[] alternative = {"Липецк", "Сосновый бор", "Лесная жемчужина", "Сосны"};
+
+
+        String result = runAnalyticHierarchyProcess(alternative, A, B, C, D, critery);
+        String GREEN = "\u001B[32m";
+        String RESET = "\u001B[0m";
+
+        System.out.println(GREEN + "Результат работы программы." + RESET);
+        System.out.println("Лучший выбор: " + result);
     }
 }
