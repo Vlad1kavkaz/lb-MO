@@ -51,8 +51,8 @@ public class ParetoMethod extends JFrame{
         frame.setSize(width, height);
 
         double finalMinX = minX - 1;
-        double finalMinY = minY - 1;  // Изменено
-        double finalMaxY = maxY + 1;  // Изменено
+        double finalMinY = minY - 1;
+        double finalMaxY = maxY + 1;
         double finalMaxX = maxX + 1;
 
         JPanel panel = new JPanel() {
@@ -67,31 +67,38 @@ public class ParetoMethod extends JFrame{
                     g.drawString(String.valueOf(x), xPos - 5, height - padding + 15);
                 }
                 for (int y = (int) Math.ceil(finalMinY); y <= (int) Math.floor(finalMaxY); y++) {
-                    int yPos = (int) ((finalMaxY - y) * scale) + padding;  // Изменено
+                    int yPos = (int) ((finalMaxY - y) * scale) + padding;
                     g.drawLine(padding, yPos, width - padding, yPos);
                     g.drawString(String.valueOf(y), padding - 35, yPos + 5);
                 }
 
                 for (Point point : setPareto) {
                     int x = (int) ((point.x - finalMinX) * scale) + padding;
-                    int y = (int) ((finalMaxY - point.y) * scale) + padding;  // Изменено
+                    int y = (int) ((finalMaxY - point.y) * scale) + padding;
                     g.setColor(Color.BLUE);
                     g.fillOval(x - 2, y - 2, 5, 5);
                 }
 
                 int x = (int) ((utopiaPoint.x - finalMinX) * scale) + padding;
-                int y = (int) ((finalMaxY - utopiaPoint.y) * scale) + padding;  // Изменено
+                int y = (int) ((finalMaxY - utopiaPoint.y) * scale) + padding;
                 g.setColor(Color.RED);
                 g.fillOval(x - 3, y - 3, 7, 7);
 
                 g.setColor(Color.BLACK);
                 g.drawString("Точка утопии", x, y - 10);
+
+                // Подписываем ось x
+                g.drawString("y", padding - 50, height / 2);
+
+                // Подписываем ось y
+                g.drawString("x", width / 2, height - padding + 40);
             }
         };
 
         frame.add(panel);
         frame.setVisible(true);
     }
+
 
 
     public static double manhettenLength(Point p1, Point p2) {
