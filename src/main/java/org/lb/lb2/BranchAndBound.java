@@ -8,7 +8,7 @@ public class BranchAndBound {
 
     }
 
-    public static double[] branchAndBound(double[][] A, double[] b, double[] c, double[] currentSolution) {
+    /*public static double[] branchAndBound(double[][] A, double[] b, double[] c, double[] currentSolution) {
         double[] bestIntegerSolution = currentSolution; // Для отслеживания наилучшего целочисленного решения
 
         // Начальное решение округляется до ближайшего целого
@@ -110,5 +110,5 @@ public class BranchAndBound {
 
             return new BranchNode(rightChildA, rightChildB, rightChildC);
         }
-    }
+    }*/
 }
