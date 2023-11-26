@@ -46,7 +46,7 @@ public class Simplex {
         System.out.println("Оптимальное значение: " + df.format(optimalValue));
         System.out.println("Оптимальные значения переменных:");
         for (int i = 0; i < optimalPoint.length; i++) {
-            System.out.println("x_" + i + ": " + df.format(optimalPoint[i]));
+            System.out.println("u_" + i + ": " + df.format(optimalPoint[i]));
         }
 
         List<Double> result = new ArrayList<>();
@@ -96,7 +96,7 @@ public class Simplex {
         System.out.println("Оптимальное значение: " + df.format(optimalValue));
         System.out.println("Оптимальные значения переменных:");
         for (int i = 0; i < optimalPoint.length; i++) {
-            System.out.println("x_" + i + ": " + df.format(optimalPoint[i]));
+            System.out.println("v_" + i + ": " + df.format(optimalPoint[i]));
         }
 
         List<Double> result = new ArrayList<>();
