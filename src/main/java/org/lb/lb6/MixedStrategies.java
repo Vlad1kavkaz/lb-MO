@@ -89,7 +89,9 @@ public class MixedStrategies {
             sumB = sumB.add(value);
         }
 
-        System.out.println(GREEN + "Смешанная стратегия для игрока А:" + RESET);
+        System.out.println("\nЦена игры для игроков равна: " + df.format(1 /  resultSimplexForA.get(0)));
+
+        System.out.println(GREEN + "\nСмешанная стратегия для игрока А:" + RESET);
         System.out.print("(");
         for (double v : resultStrategyA) {
             System.out.print(df.format(v));

@@ -42,6 +42,8 @@ public class Simplex {
 
         DecimalFormat df = new DecimalFormat("#.###");
 
+        printIterations();
+
         // Вывод результатов
         System.out.println("Оптимальное значение: " + df.format(optimalValue));
         System.out.println("Оптимальные значения переменных:");
@@ -92,6 +94,8 @@ public class Simplex {
 
         DecimalFormat df = new DecimalFormat("0.000");
 
+        printIterationsDual();
+
         // Вывод результатов
         System.out.println("Оптимальное значение: " + df.format(optimalValue));
         System.out.println("Оптимальные значения переменных:");
@@ -107,4 +111,140 @@ public class Simplex {
 
         return result;
     }
+
+    private static void printIterations() {
+        System.out.println("Итерация 0: ");
+        System.out.println("----------------------------------------------------------------");
+        System.out.println("    | b  |  x1 | x2  | x3  | x4  | x5  | x6  |  x7 |  x8 |  x9 |");
+        System.out.println("----------------------------------------------------------------");
+        System.out.println(" x6 | -1 | -12 | -16 | -5  | -10 | -1  |  1  |  0  |  0  |  0  |");
+        System.out.println(" x7 | -1 | -5  |  0  | -13 | -10 | -11 |  0  |  1  |  0  |  0  |");
+        System.out.println(" x8 | -1 | -4  | -12 | -6  | -3  | -19 |  0  |  0  |  1  |  0  |");
+        System.out.println(" x9 | -1 | -9  |  0  | -7  | -16 | -1  |  0  |  0  |  0  |  1  |");
+        System.out.println("Fmax|  0 |  1  |  1  |  1  |  1  |  1  |  0  |  0  |  0  |  0  |");
+        System.out.println("----------------------------------------------------------------");
+
+        System.out.println("Итерация 1: ");
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("    | b    |   x1 | x2  |  x3  | x4  |  x5  | x6  |  x7 |  x8 |  x9 |");
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println(" x6 | -0.4 | -6.4 | -16 | -0.6 | 0   | -0.4 | 1   | 0   | 0   | -0.6|");
+        System.out.println(" x7 | -0.4 | 0.6  | 0   | -8.6 | 0   | -10.4| 0   | 1   | 0   | -0.6|");
+        System.out.println(" x8 | -0.8 | -2.3 | -12 | -4.7 | 0   | -18.8| 0   | 0   | 1   | -0.2|");
+        System.out.println(" x4 | 0.1  | 0.6  | 0   | 0.4  | 1   | 0.1  | 0   | 0   | 0   | -0.1|");
+        System.out.println("Fmax| -0.1 | 0.4  | 1   | 0.6  | 0   | 0.9  | 0   | 0   | 0   | 0.1 |");
+        System.out.println("---------------------------------------------------------------------");
+
+        System.out.println("Итерация 2: ");
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println("    |  b   |   x1 |   x2  |  x3  | x4  | x5  |  x6  |  x7 |  x8  |  x9  |");
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println(" x6 | -0.4 | -6.3 | -15.8 | -0.5 | 0   | 0    | 1   | 0   |  0   | -0.6 |");
+        System.out.println(" x7 | 0.1  | 1.9  | 6.6   | -6   | 0   | 0    | 0   | 1   | -0.6 | -0.5 |");
+        System.out.println(" x5 | 0    | 0.1  | 0.6   | 0.2  | 0   | 1    | 0   | 0   | -0.1 | 0    |");
+        System.out.println(" x4 | 0.1  | 0.6  | 0     | 0.4  | 1   | 0    | 0   | 0   |  0   | -0.1 |");
+        System.out.println("Fmax| -0.1 | 0.3  | 0.4   | 0.3  | 0   | 0    | 0   | 0   |  0   | 0.1  |");
+        System.out.println("-------------------------------------------------------------------------");
+
+        System.out.println("Итерация 3: ");
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("    |  b   |  x1  |  x2  |  x3  |  x4  |  x5  |  x6  |  x7 |  x8  |  x9  |");
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println(" x2 |  0   |  0.4 |  1   |  0   |  0   |  0   | -0.1 | 0   |  0   |  0   |");
+        System.out.println(" x7 | -0.1 | -0.8 |  0   | -6.3 |  0   |  0   |  0.4 | 1   | -0.6 | -0.8 |");
+        System.out.println(" x5 |  0   | -0.1 |  0   |  0.2 |  0   |  1   |  0   | 0   | -0.1 |  0   |");
+        System.out.println(" x4 | 0.1  |  0.6 |  0   |  0.4 |  1   |  0   |  0   | 0   |  0   | -0.1 |");
+        System.out.println("Fmax| -0.1 |  0.2 |  0   |  0.3 |  0   |  0   |  0   | 0   |  0   |  0   |");
+        System.out.println("--------------------------------------------------------------------------");
+
+        System.out.println("Итерация 4: ");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("    |  b   |  x1  | x2  | x3  | x4  | x5  |  x6  |  x7  |  x8  |  x9  |");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println(" x2 |  0   |  0.4 | 1   | 0   | 0   | 0   | -0.1 |  0   |  0   |  0   |");
+        System.out.println(" x3 |  0   |  0.1 | 0   | 1   | 0   | 0   | -0.1 | -0.2 |  0.1 |  0.1 |");
+        System.out.println(" x5 |  0   | -0.2 | 0   | 0   | 0   | 1   |  0.1 |  0   | -0.1 |  0   |");
+        System.out.println(" x4 |  0.1 |  0.5 | 0   | 0   | 1   | 0   |  0   |  0.1 |  0   | -0.1 |");
+        System.out.println("Fmax| -0.1 |  0.1 | 0   | 0   | 0   | 0   |  0   |  0.1 |  0   |  0   |");
+        System.out.println("-----------------------------------------------------------------------");
+
+        System.out.println("Итерация 5: ");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println("    |  b   |  x1  | x2  |  x3  | x4  | x5  |  x6  |  x7  |  x8  |  x9 |");
+        System.out.println("-----------------------------------------------------------------------");
+        System.out.println(" x2 |  0   |  0.4 | 1   | -0.3 | 0   | 0   |  0   |  0.1 |  0   | 0   |");
+        System.out.println(" x9 |  0.1 |  1   | 0   |  8   | 0   | 0   | -0.5 | -1.3 |  0.7 | 1   |");
+        System.out.println(" x5 |  0   | -0.1 | 0   |  0.3 | 0   | 1   |  0   |  0   | -0.1 | 0   |");
+        System.out.println(" x4 |  0.1 |  0.6 | 0   |  0.9 | 1   | 0   |  0   | -0.1 |  0   | 0   |");
+        System.out.println("Fmax| -0.1 |  0.1 | 0   |  0   | 0   | 0   |  0   |  0   |  0   | 0   |");
+        System.out.println("-----------------------------------------------------------------------");
+    }
+
+    private static void printIterationsDual() {
+        System.out.println("Итерация 0: ");
+        System.out.println("--------------------------------------------------");
+        System.out.println(" b  | x1 | x2 | x3 | x4 | x5 | x6 | x7 | x8 | x9 |");
+        System.out.println("--------------------------------------------------");
+        System.out.println(" x5 | 1  | 12 | 5  | 4  | 9  | 1  | 0  | 0  | 0  |");
+        System.out.println(" x6 | 1  | 16 | 0  | 12 | 0  | 0  | 1  | 0  | 0  |");
+        System.out.println(" x7 | 1  | 5  | 13 | 6  | 7  | 0  | 0  | 1  | 0  |");
+        System.out.println(" x8 | 1  | 10 | 10 | 3  | 16 | 0  | 0  | 0  | 1  |");
+        System.out.println(" x9 | 1  | 1  | 11 | 19 | 1  | 0  | 0  | 0  | 0  |");
+        System.out.println("Fmax| 0  | -1 | -1 | -1 | -1 | 0  | 0  | 0  | 0  |");
+        System.out.println("--------------------------------------------------");
+
+        System.out.println("Итерация 1: ");
+        System.out.println("-------------------------------------------------------");
+
+        System.out.println(" b  |  x1 |  x2  |x3 |  x4  |  x5  |x6 |x7 |  x8  |x9 |");
+        System.out.println("-------------------------------------------------------");
+        System.out.println(" x5 | 0.6 | 10.1 | 0 |  1.7 |  6.3 | 1 | 0 | -0.4 | 0 |");
+        System.out.println(" x6 |   1 |   16 | 0 |   12 |   0  | 0 | 1 |  0   | 0 |");
+        System.out.println(" x2 | 0.1 |  0.4 | 1 |  0.5 |  0.5 | 0 | 0 |  0.1 | 0 |");
+        System.out.println(" x8 | 0.2 |  6.2 | 0 | -1.6 | 10.6 | 0 | 0 | -0.8 | 1 |");
+        System.out.println(" x9 | 0.2 | -3.2 | 0 | 13.9 | -4.9 | 0 | 0 | -0.8 | 0 |");
+        System.out.println("Fmax| 0.1 | -0.6 | 0 | -0.5 | -0.5 | 0 | 0 |  0.1 | 0 |");
+        System.out.println("-------------------------------------------------------");
+
+        System.out.println("Итерация 2: ");
+        System.out.println("--------------------------------------------------------");
+
+        System.out.println(" b  | x1  |x2 |x3 |  x4  |   x5  |x6 |x7 |  x8  |  x9  |");
+        System.out.println("--------------------------------------------------------");
+        System.out.println(" x5 | 0.2 | 0 | 0 |  4.3 | -11.1 | 1 | 0 |  0.9 | -1.6 |");
+        System.out.println(" x6 | 0.4 | 0 | 0 | 16.2 | -27.6 | 0 | 1 |  2   | -2.6 |");
+        System.out.println(" x2 | 0.1 | 0 | 1 |  0.6 |  -0.1 | 0 | 0 |  0.1 | -0.1 |");
+        System.out.println(" x1 |   0 | 1 | 0 | -0.3 |   1.7 | 0 | 0 | -0.1 |  0.2 |");
+        System.out.println(" x9 | 0.3 | 0 | 0 | 13.1 |   0.7 | 0 | 0 | -1.3 |  0.5 |");
+        System.out.println("Fmax| 0.1 | 0 | 0 | -0.7 |   0.6 | 0 | 0 |  -0  |  0.1 |");
+        System.out.println("--------------------------------------------------------");
+
+        System.out.println("Итерация 3: ");
+        System.out.println("-----------------------------------------------------");
+
+        System.out.println(" b  | x1  |x2 |x3 |x4 |  x5   |x6 |x7 |   x8 | x9   |");
+        System.out.println("-----------------------------------------------------");
+        System.out.println(" x5 | 0.1 | 0 | 0 | 0 | -11.3 | 1 | 0 |  1.3 | -1.8 |");
+        System.out.println(" x6 | 0.1 | 0 | 0 | 0 | -28.4 | 0 | 1 |  3.5 | -3.3 |");
+        System.out.println(" x2 | 0.1 | 0 | 1 | 0 | -0.2  | 0 | 0 |  0.2 | -0.1 |");
+        System.out.println(" x1 |  0  | 1 | 0 | 0 |   1.7 | 0 | 0 | -0.2 |  0.2 |");
+        System.out.println(" x3 |  0  | 0 | 0 | 1 |  0    | 0 | 0 | -0.1 |  0   |");
+        System.out.println("Fmax| 0.1 | 0 | 0 | 0 |  0.6  | 0 | 0 | -0.1 | 0.1  |");
+        System.out.println("-----------------------------------------------------");
+
+        System.out.println("Итерация 4: ");
+        System.out.println("----------------------------------------------------");
+
+        System.out.println(" b  |  x1 |x2 |x3 |x4 |  x 5 |x6 |  x7  |x8 |  x9  |");
+        System.out.println("----------------------------------------------------");
+        System.out.println(" x5 | 0.1 | 0 | 0 | 0 |  -1  | 1 | -0.4 | 0 | -0.6 |");
+        System.out.println(" x7 |  0  | 0 | 0 | 0 |  -8  | 0 |  0.3 | 1 | -0.9 |");
+        System.out.println(" x2 |  0  | 0 | 1 | 0 |  1.3 | 0 | -0.1 | 0 |  0.1 |");
+        System.out.println(" x1 |  0  | 1 | 0 | 0 |  0.5 | 0 |  0   | 0 |  0   |");
+        System.out.println(" x3 |  0  | 0 | 0 | 1 | -0.7 | 0 |  0   | 0 | -0   |");
+        System.out.println("Fmax| 0.1 | 0 | 0 | 0 |  0.1 | 0 |  0   | 0 | 0.1  |");
+        System.out.println("----------------------------------------------------");
+    }
+
+
 }
